@@ -18,7 +18,7 @@ services:
     ports:
       - "1521:1521"
     env_file:
-      - ../../.env
+      - ./oracle.env
     volumes:
       - oracle_data:/opt/oracle/oradata
     restart: unless-stopped

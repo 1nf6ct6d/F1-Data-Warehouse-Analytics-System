@@ -39,3 +39,23 @@ def get_minio_settings() -> tuple[str, str, str, str, str, bool]:
         minio_bucket_staging,
         minio_secure,
     )
+
+def get_oracle_settings() -> tuple[str, str, str, str, str]:
+    host = os.getenv("ORACLE_HOST")
+    port = os.getenv("ORACLE_PORT")
+    service_name = os.getenv("ORACLE_SERVICE_NAME")
+    user = os.getenv("ORACLE_USER")
+    password = os.getenv("ORACLE_PASSWORD")
+
+    if host is None:
+        raise ValueError("ORACLE_HOST пустой")
+    if port is None:
+        raise ValueError("ORACLE_PORT пустой")
+    if service_name is None:
+        raise ValueError("ORACLE_SERVICE_NAME пустой")
+    if user is None:
+        raise ValueError("ORACLE_USER пустой")
+    if password is None:
+        raise ValueError("ORACLE_PASSWORD пустой")
+
+    return host, port, service_name, user, password
