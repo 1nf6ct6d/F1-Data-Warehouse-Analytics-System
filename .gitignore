@@ -49,6 +49,9 @@ data/local/
 airflow/logs/
 airflow/plugins/__pycache__/
 airflow/dags/__pycache__/
+airflow/airflow.db
+airflow/logs/
+airflow/*.log
 
 # Build artifacts
 dist/
