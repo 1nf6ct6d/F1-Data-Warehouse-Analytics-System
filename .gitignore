@@ -37,6 +37,7 @@ htmlcov/
 
 # Local data
 data/raw/
+data/staging/
 data/tmp/
 data/local/
 
