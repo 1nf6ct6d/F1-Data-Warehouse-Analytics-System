@@ -3,7 +3,7 @@ from src.common.config import get_minio_settings
 
 
 def get_minio_client():
-    endpoint, access_key, secret_key, _, secure = get_minio_settings()
+    endpoint, access_key, secret_key, _, _, secure = get_minio_settings()
 
     client = Minio(
         endpoint,
