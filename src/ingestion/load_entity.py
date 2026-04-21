@@ -11,23 +11,7 @@ from src.ingestion.client import F1ApiClient
 from src.ingestion.storage import upload_file_to_minio
 
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--season", type=int, required=True)
-    parser.add_argument(
-        "--entity",
-        type=str,
-        required=True,
-    )
-    return parser.parse_args()
-
-
-def main() -> None:
-    args = parse_args()
-
-    season = args.season
-    entity = args.entity
-
+def load_single_entity(season: int, entity: str) -> None:
     print(f"[START] Начинаю загрузку entity={entity}, season={season}")
 
     api_base_url = get_f1_api_base_url()
@@ -58,7 +42,23 @@ def main() -> None:
 
     print(f"[MINIO] Bucket: {bucket_name}")
     print(f"[MINIO] Object key: {object_key}")
-    print("[DONE] Загрузка завершена успешно")
+    print(f"[DONE] Загрузка entity={entity} завершена успешно")
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--season", type=int, required=True)
+    parser.add_argument(
+        "--entity",
+        type=str,
+        required=True,
+    )
+    return parser.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+    load_single_entity(season=args.season, entity=args.entity)
 
 
 if __name__ == "__main__":
