@@ -29,7 +29,7 @@ def load_single_entity(season: int, entity: str) -> None:
 
     print(f"[LOCAL] Файл сохранен локально: {file_path}")
 
-    _, _, _, bucket_name, _ = get_minio_settings()
+    _, _, _, bucket_name, _, _ = get_minio_settings()
 
     object_key = build_raw_object_key(
         entity=entity,
@@ -37,7 +37,7 @@ def load_single_entity(season: int, entity: str) -> None:
         timestamp=timestamp,
         file_name=file_path.name,
     )
-
+    
     upload_file_to_minio(file_path, bucket_name, object_key)
 
     print(f"[MINIO] Bucket: {bucket_name}")
