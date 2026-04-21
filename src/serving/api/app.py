@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
 
 from src.serving.api.queries import (
     fetch_constructor_points,
@@ -14,6 +15,14 @@ from src.serving.api.schemas import (
 )
 
 app = FastAPI(title="F1 DWH Analytics API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/health")
