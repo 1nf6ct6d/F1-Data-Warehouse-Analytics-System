@@ -23,6 +23,53 @@ services:
       - oracle_data:/opt/oracle/oradata
     restart: unless-stopped
 
+  airflow-webserver:
+    build:
+      context: ../../
+      dockerfile: infra/docker/airflow.Dockerfile
+    container_name: f1-airflow-webserver
+    depends_on:
+      - airflow-scheduler
+      - oracle
+    env_file:
+      - ../../.env
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/airflow.db
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "True"
+      ORACLE_HOST: oracle
+      MINIO_ENDPOINT: minio:9000
+    volumes:
+      - ../../airflow:/opt/airflow
+      - ../../:/opt/project
+    ports:
+      - "8088:8080"
+    command: webserver
+    restart: unless-stopped
+
+  airflow-scheduler:
+    build:
+      context: ../../
+      dockerfile: infra/docker/airflow.Dockerfile
+    container_name: f1-airflow-scheduler
+    depends_on:
+      - oracle
+    env_file:
+      - ../../.env
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/airflow.db
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "True"
+      ORACLE_HOST: oracle
+      MINIO_ENDPOINT: minio:9000
+    volumes:
+      - ../../airflow:/opt/airflow
+      - ../../:/opt/project
+    command: scheduler
+    restart: unless-stopped
+
 volumes:
   minio_data:
   oracle_data:
