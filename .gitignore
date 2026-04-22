@@ -1,19 +1,16 @@
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-.python-version
+*$py.class
 
-# Virtual environments
-.venv/
+# Virtual environment
 venv/
-env/
+.venv/
 
-# Environment variables
+# Environment files
 .env
 
-# IDE / Editor
+# IDE
 .vscode/
 .idea/
 
@@ -21,47 +18,29 @@ env/
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-logs/
-
-# Test / cache
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.coverage
-htmlcov/
-
-# Jupyter
-.ipynb_checkpoints/
-
 # Local data
 data/raw/
 data/staging/
-data/tmp/
-data/local/
 
-# Temporary editor files
-*tempCodeRunner*
-*.tmp
-
-# Airflow
-airflow/logs/
-airflow/plugins/__pycache__/
-airflow/dags/__pycache__/
+# Airflow local state
 airflow/airflow.db
 airflow/logs/
 airflow/*.log
+
+# Python temp / cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
 
 # Build artifacts
 dist/
 build/
 *.egg-info/
 
-# Dumps / backups
-*.dmp
-*.dump
-*.bak
-
-# Secrets
-secrets/
+# Local databases / temp files
+*.sqlite
+*.db
+*.tmp

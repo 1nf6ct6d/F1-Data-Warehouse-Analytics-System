@@ -5,4 +5,4 @@ pandas
 oracledb
 fastapi
 uvicorn
-clickhouse_connect
+clickhouse-connect
