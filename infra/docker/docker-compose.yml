@@ -69,7 +69,22 @@ services:
       - ../../:/opt/project
     command: scheduler
     restart: unless-stopped
+  
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.3
+    container_name: f1-clickhouse
+    ports:
+      - "8123:8123"
+      - "9009:9000"
+    environment:
+      CLICKHOUSE_DB: f1_serving
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: clickhouse
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+    restart: unless-stopped
 
 volumes:
   minio_data:
   oracle_data:
+  clickhouse_data:

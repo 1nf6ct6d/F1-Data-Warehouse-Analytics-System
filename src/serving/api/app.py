@@ -1,10 +1,12 @@
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.serving.api.clickhouse_queries import (
+    fetch_constructor_points_from_clickhouse,
+    fetch_driver_points_from_clickhouse,
+)
 from src.serving.api.queries import (
-    fetch_constructor_points,
     fetch_driver_podiums,
-    fetch_driver_points,
     fetch_race_results,
 )
 from src.serving.api.schemas import (
@@ -32,12 +34,12 @@ def healthcheck():
 
 @app.get("/driver-points", response_model=list[DriverPointsResponse])
 def get_driver_points(limit: int = Query(default=20, ge=1, le=100)):
-    return fetch_driver_points(limit=limit)
+    return fetch_driver_points_from_clickhouse(limit=limit)
 
 
 @app.get("/constructor-points", response_model=list[ConstructorPointsResponse])
 def get_constructor_points(limit: int = Query(default=20, ge=1, le=100)):
-    return fetch_constructor_points(limit=limit)
+    return fetch_constructor_points_from_clickhouse(limit=limit)
 
 
 @app.get("/driver-podiums", response_model=list[DriverPodiumsResponse])

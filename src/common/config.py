@@ -59,3 +59,23 @@ def get_oracle_settings() -> tuple[str, str, str, str, str]:
         raise ValueError("ORACLE_PASSWORD пустой")
 
     return host, port, service_name, user, password
+
+def get_clickhouse_settings():
+    host = os.getenv("CLICKHOUSE_HOST")
+    port = os.getenv("CLICKHOUSE_PORT")
+    database = os.getenv("CLICKHOUSE_DATABASE")
+    user = os.getenv("CLICKHOUSE_USER")
+    password = os.getenv("CLICKHOUSE_PASSWORD")
+
+    if host is None:
+        raise ValueError("CLICKHOUSE_HOST пустой")
+    if port is None:
+        raise ValueError("CLICKHOUSE_PORT пустой")
+    if database is None:
+        raise ValueError("CLICKHOUSE_DATABASE пустой")
+    if user is None:
+        raise ValueError("CLICKHOUSE_USER пустой")
+    if password is None:
+        raise ValueError("CLICKHOUSE_PASSWORD пустой")
+
+    return host, int(port), database, user, password

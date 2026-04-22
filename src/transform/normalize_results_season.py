@@ -16,7 +16,6 @@ def get_latest_results_raw_files_for_season(season: int) -> list[Path]:
 
     for file_path in files:
         parts = file_path.stem.split("_")
-        # results_2023_1_20260422_...
         if len(parts) < 4:
             continue
 
