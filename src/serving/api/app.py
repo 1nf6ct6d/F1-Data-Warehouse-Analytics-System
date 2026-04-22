@@ -6,6 +6,7 @@ from src.serving.api.clickhouse_queries import (
     fetch_driver_points_from_clickhouse,
 )
 from src.serving.api.queries import (
+    fetch_available_seasons,
     fetch_driver_podiums,
     fetch_race_results,
 )
@@ -30,6 +31,11 @@ app.add_middleware(
 @app.get("/health")
 def healthcheck():
     return {"status": "ok"}
+
+
+@app.get("/available-seasons", response_model=list[int])
+def get_available_seasons():
+    return fetch_available_seasons()
 
 
 @app.get("/driver-points", response_model=list[DriverPointsResponse])

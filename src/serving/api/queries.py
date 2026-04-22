@@ -160,3 +160,22 @@ def fetch_race_results(season: int, round_number: int) -> list[dict]:
     cursor.close()
     connection.close()
     return result
+
+def fetch_available_seasons() -> list[int]:
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT DISTINCT season
+        FROM vw_race_results
+        ORDER BY season
+        """
+    )
+
+    rows = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    return [int(row[0]) for row in rows]

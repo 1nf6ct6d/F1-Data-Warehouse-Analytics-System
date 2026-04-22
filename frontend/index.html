@@ -1,50 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>F1 Analytics Demo</title>
+  <title>F1 Analytics System</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>F1 Analytics Demo</h1>
-      <p>Oracle DWH + FastAPI demo frontend</p>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-topline">F1 DATA WAREHOUSE & ANALYTICS SYSTEM</div>
+      <h1>Аналитическая платформа по данным Формулы-1</h1>
+      <p class="hero-subtitle">
+        Oracle DWH, ClickHouse serving layer, FastAPI backend, Airflow orchestration и demo UI
+      </p>
+
+      <div class="hero-badges">
+        <span>Oracle</span>
+        <span>ClickHouse</span>
+        <span>FastAPI</span>
+        <span>Airflow</span>
+        <span>MinIO</span>
+      </div>
     </header>
 
-    <section class="card">
-      <h2>Driver Points</h2>
-      <button id="load-driver-points">Load Driver Points</button>
-      <div id="driver-points-table"></div>
-    </section>
-
-    <section class="card">
-      <h2>Constructor Points</h2>
-      <button id="load-constructor-points">Load Constructor Points</button>
-      <div id="constructor-points-table"></div>
-    </section>
-
-    <section class="card">
-      <h2>Driver Podiums</h2>
-      <button id="load-driver-podiums">Load Driver Podiums</button>
-      <div id="driver-podiums-table"></div>
-    </section>
-
-    <section class="card">
-      <h2>Race Results</h2>
-      <div class="filters">
-        <label>
-          Season
-          <input type="number" id="season-input" value="2023" min="2000" max="2100" />
-        </label>
-        <label>
-          Round
-          <input type="number" id="round-input" value="1" min="1" max="30" />
-        </label>
-        <button id="load-race-results">Load Race Results</button>
+    <section class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-label">Источник данных</div>
+        <div class="summary-value">Jolpica F1 API</div>
       </div>
-      <div id="race-results-table"></div>
+      <div class="summary-card">
+        <div class="summary-label">DWH</div>
+        <div class="summary-value">Oracle</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Serving</div>
+        <div class="summary-value">ClickHouse</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Оркестрация</div>
+        <div class="summary-value">Airflow</div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Leaderboard</div>
+          <h2>Пилоты и конструкторы</h2>
+        </div>
+        <button class="primary-btn" id="refresh-all">Обновить все данные</button>
+      </div>
+
+      <div class="cards-grid two-cols">
+        <article class="panel">
+          <div class="panel-header">
+            <h3>Driver Points</h3>
+            <span class="panel-tag">ClickHouse</span>
+          </div>
+          <div id="driver-points-table"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h3>Constructor Points</h3>
+            <span class="panel-tag">ClickHouse</span>
+          </div>
+          <div id="constructor-points-table"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Performance</div>
+          <h2>Подиумы и результаты гонок</h2>
+        </div>
+      </div>
+
+      <div class="cards-grid two-cols">
+        <article class="panel">
+          <div class="panel-header">
+            <h3>Driver Podiums</h3>
+            <span class="panel-tag panel-tag-oracle">Oracle</span>
+          </div>
+          <div id="driver-podiums-table"></div>
+        </article>
+
+        <article class="panel panel-results">
+          <div class="panel-header">
+            <h3>Race Results</h3>
+            <span class="panel-tag panel-tag-oracle">Oracle</span>
+          </div>
+
+          <div class="filters">
+            <div class="filter-group">
+              <label for="season-select">Сезон</label>
+              <select id="season-select"></select>
+            </div>
+
+            <div class="filter-group">
+              <label for="round-select">Раунд</label>
+              <select id="round-select"></select>
+            </div>
+
+            <button class="primary-btn" id="load-race-results">Показать результаты</button>
+          </div>
+
+          <div id="race-results-table"></div>
+        </article>
+      </div>
     </section>
   </div>
 
