@@ -3,6 +3,7 @@
 Мой проект, в котором данные Формулы-1 проходят полный путь:
 
 **API → raw layer → staging → DWH → serving → backend → demo frontend**
+<img width="2532" height="1296" alt="image" src="https://github.com/user-attachments/assets/7a883563-c8cd-48fa-a37b-8d07d492f61e" />
 
 ---
 ## Технологический стек
@@ -155,6 +156,8 @@
   - fact load
 
 ---
+<img width="1910" height="1131" alt="image" src="https://github.com/user-attachments/assets/b13b4773-e012-443b-af5a-74ff1cea7368" />
+
 
 ## Архитектура
 
